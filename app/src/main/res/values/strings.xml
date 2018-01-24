@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Fernsteuerung</string>
+    <string name="strg">STRG</string>
+    <string name="command_log">command log</string>
+    <string name="alt">ALT</string>
+    <string name="command">command</string>
+    <string name="windows">WINDOWS</string>
+    <string name="slash">/</string>
+    <string name="send">send</string>
+</resources>
