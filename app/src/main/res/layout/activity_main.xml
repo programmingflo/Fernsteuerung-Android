@@ -45,22 +45,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_command_slash"
-            android:text="@string/slash"/>
+            android:text="@string/slash"
+            tools:ignore="ButtonStyle" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_command_strg"
-            android:text="@string/strg"/>
+            android:text="@string/strg"
+            tools:ignore="ButtonStyle" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_command_alt"
-            android:text="@string/alt"/>
+            android:text="@string/alt"
+            tools:ignore="ButtonStyle" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_command_windows"
-            android:text="@string/windows"/>
+            android:text="@string/windows"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/main_command2">
+        <!--<Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_command_slash_"
+            android:text="@string/slash"
+            tools:ignore="ButtonStyle" />-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_command_strg_release"
+            android:text="@string/strgRelease"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_command_alt_release"
+            android:text="@string/altRelease"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_command_windows_release"
+            android:text="@string/windowsRelease"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     <LinearLayout
