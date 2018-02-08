@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">Fernsteuerung</string>
-    <string name="strg">STRG</string>
+    <string name="baseurl">https://146programming.de/fernsteuerung/</string>
+
     <string name="command_log">command log</string>
-    <string name="alt">ALT</string>
     <string name="command">command</string>
+
+    <string name="strg">STRG</string>
+    <string name="strgRelease">STRG-RELEASE</string>
+    <string name="alt">ALT</string>
+    <string name="altRelease">ALT-RELEASE</string>
     <string name="windows">WINDOWS</string>
+    <string name="windowsRelease">WINDOWS-RELEASE</string>
     <string name="slash">/</string>
     <string name="send">send</string>
+    <string name="settings">settings</string>
 </resources>
