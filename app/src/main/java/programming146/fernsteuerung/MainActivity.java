@@ -23,14 +23,17 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText commandInput = (EditText) findViewById(R.id.main_command_input);
         TextView commandLog = (TextView) findViewById(R.id.main_command_log);
-        final Button commmandStrg = (Button) findViewById(R.id.main_command_strg);
-        Button commmandAlt = (Button) findViewById(R.id.main_command_alt);
-        Button commmandWindows = (Button) findViewById(R.id.main_command_windows);
-        Button commmandSlash = (Button) findViewById(R.id.main_command_slash);
-        Button commmandSend = (Button) findViewById(R.id.main_command_send);
+        Button commandStrg = (Button) findViewById(R.id.main_command_strg);
+        Button commandStrgRelease = (Button) findViewById(R.id.main_command_strg_release);
+        Button commandAlt = (Button) findViewById(R.id.main_command_alt);
+        Button commandAltRelease = (Button) findViewById(R.id.main_command_alt_release);
+        Button commandWindows = (Button) findViewById(R.id.main_command_windows);
+        Button commandWindowsRelease = (Button) findViewById(R.id.main_command_windows_release);
+        Button commandSlash = (Button) findViewById(R.id.main_command_slash);
+        Button commandSend = (Button) findViewById(R.id.main_command_send);
 
         //TODO: improve code
-        commmandStrg.setOnClickListener(new View.OnClickListener() {
+        commandStrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String command = commandInput.getText().toString() + getString(R.string.strg);
@@ -38,7 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 commandInput.setSelection(commandInput.length());
             }
         });
-        commmandAlt.setOnClickListener(new View.OnClickListener() {
+        commandStrgRelease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String command = commandInput.getText().toString() + getString(R.string.strgRelease);
+                commandInput.setText(command);
+                commandInput.setSelection(commandInput.length());
+            }
+        });
+        commandAlt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String command = commandInput.getText().toString() + getString(R.string.alt);
@@ -46,7 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 commandInput.setSelection(commandInput.length());
             }
         });
-        commmandWindows.setOnClickListener(new View.OnClickListener() {
+        commandAltRelease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String command = commandInput.getText().toString() + getString(R.string.altRelease);
+                commandInput.setText(command);
+                commandInput.setSelection(commandInput.length());
+            }
+        });
+        commandWindows.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String command = commandInput.getText().toString() + getString(R.string.windows);
@@ -54,7 +73,15 @@ public class MainActivity extends AppCompatActivity {
                 commandInput.setSelection(commandInput.length());
             }
         });
-        commmandSlash.setOnClickListener(new View.OnClickListener() {
+        commandWindowsRelease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String command = commandInput.getText().toString() + getString(R.string.windowsRelease);
+                commandInput.setText(command);
+                commandInput.setSelection(commandInput.length());
+            }
+        });
+        commandSlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String command = commandInput.getText().toString() + getString(R.string.slash);
@@ -63,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        commmandSend.setOnClickListener(new View.OnClickListener() {
+        commandSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String command = commandInput.getText().toString();
