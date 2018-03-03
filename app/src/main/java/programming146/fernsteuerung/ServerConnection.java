@@ -27,7 +27,7 @@ import javax.net.ssl.HttpsURLConnection;
  *
  * Communication with server
  */
-public class ServerConnection extends AsyncTask<String,Void,JSONObject> {
+class ServerConnection extends AsyncTask<String,Void,JSONObject> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
 
