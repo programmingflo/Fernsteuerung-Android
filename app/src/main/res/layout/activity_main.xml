@@ -15,19 +15,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/main_goal">
+
         <TextView
+            android:id="@+id/main_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/main_goal_name"
-            android:text="Hello World!"
-            android:gravity="start" />
-        <TextView
-            android:layout_width="wrap_content"
+            android:gravity="start"
+            android:text="@string/author" />
+
+        <!--<TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/main_goal_id"
-            android:text="Hello World!"
-            android:gravity="end" />
-        <!--TODO: move to right-->
+            android:layout_weight="1"
+            android:text="->" />-->
+
+        <TextView
+            android:id="@+id/main_addressee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/addressee" />
     </LinearLayout>
 
     <TextView
