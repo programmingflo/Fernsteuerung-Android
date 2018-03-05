@@ -25,6 +25,11 @@ public class SettingsActivity extends AppCompatActivity {
         final EditText addressee = (EditText) findViewById(R.id.editTextAddressee);
         Button saveButton = (Button) findViewById(R.id.buttonSaveSettings);
 
+        SharedPreferences preferences = getSharedPreferences("preferences",MODE_PRIVATE);
+        username.setText(preferences.getString("username",""));
+        password.setText(preferences.getString("password",""));
+        addressee.setText(preferences.getString("addressee",""));
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
