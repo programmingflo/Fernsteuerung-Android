@@ -1,6 +1,7 @@
 package programming146.fernsteuerung;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //allow MainActivity use of network in main thread
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        refreshGoals();
 
         final EditText commandInput = (EditText) findViewById(R.id.main_command_input);
         TextView commandLog = (TextView) findViewById(R.id.main_command_log);
@@ -31,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         Button commandWindowsRelease = (Button) findViewById(R.id.main_command_windows_release);
         Button commandSlash = (Button) findViewById(R.id.main_command_slash);
         Button commandSend = (Button) findViewById(R.id.main_command_send);
+        final String adressat = "test";
 
-        //TODO: improve code
         commandStrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String command = commandInput.getText().toString();
-                String[] request = new String[]{"setCommand","keyboard",command};
+                String[] request = new String[]{"setCommand", adressat,"keyboard",command};
                 ServerConnection serverConnection = new ServerConnection(getApplicationContext());
                 serverConnection.doInBackground(request);
             }
@@ -116,11 +120,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsIntent);
                 return true;
 
+            case R.id.action_refresh:
+                //User chose the "Refresh" item, refresh the goal layout
+                refreshGoals();
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void refreshGoals(){
+        TextView author = (TextView) findViewById(R.id.main_author);
+        TextView addressee = (TextView) findViewById(R.id.main_addressee);
+
+        SharedPreferences preferences = getSharedPreferences("preferences",MODE_PRIVATE);
+        author.setText(preferences.getString("username","no login data"));
+        addressee.setText(preferences.getString("addressee", "no addressee"));
     }
 }
