@@ -2,15 +2,22 @@ package programming146.fernsteuerung;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         refreshGoals();
 
         final EditText commandInput = (EditText) findViewById(R.id.main_command_input);
-        TextView commandLog = (TextView) findViewById(R.id.main_command_log);
+        final TextView commandLog = (TextView) findViewById(R.id.main_command_log);
+        final TextView addressee = (TextView) findViewById(R.id.main_addressee);
         Button commandStrg = (Button) findViewById(R.id.main_command_strg);
         Button commandStrgRelease = (Button) findViewById(R.id.main_command_strg_release);
         Button commandAlt = (Button) findViewById(R.id.main_command_alt);
@@ -34,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         Button commandWindows = (Button) findViewById(R.id.main_command_windows);
         Button commandWindowsRelease = (Button) findViewById(R.id.main_command_windows_release);
         Button commandSlash = (Button) findViewById(R.id.main_command_slash);
+        Button commandSlash2 = (Button) findViewById(R.id.main_command_slash2);
         Button commandSend = (Button) findViewById(R.id.main_command_send);
-        final String adressat = "test";
+
+        commandLog.setMovementMethod(new ScrollingMovementMethod());
 
         commandStrg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,14 +103,43 @@ public class MainActivity extends AppCompatActivity {
                 commandInput.setSelection(commandInput.length());
             }
         });
+        commandSlash2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String command = commandInput.getText().toString() + getString(R.string.slash2);
+                commandInput.setText(command);
+                commandInput.setSelection(commandInput.length());
+            }
+        });
 
         commandSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String command = commandInput.getText().toString();
-                String[] request = new String[]{"setCommand", adressat,"keyboard",command};
+                String[] request = new String[]{"setCommand", addressee.getText().toString(),"keyboard",command};
                 ServerConnection serverConnection = new ServerConnection(getApplicationContext());
-                serverConnection.doInBackground(request);
+                JSONObject result = serverConnection.doInBackground(request);
+
+                String status = "";
+                try{
+                    if (result != null) {
+                        status = result.getString("status");
+                        if(!status.equals("200")){
+                            command = result.getString("error");
+                        }
+                    }
+                }catch (JSONException e){
+                    Log.d("146s",e.toString());
+                }
+                String output = commandLog.getText().toString() + "\n";
+                Integer temp = Calendar.getInstance().get(Calendar.HOUR);
+                output += correctTimeFormat(temp) + ":";
+                temp = Calendar.getInstance().get(Calendar.MINUTE);
+                output += correctTimeFormat(temp) + ":";
+                temp = Calendar.getInstance().get(Calendar.SECOND);
+                output += correctTimeFormat(temp);
+                output += "   " + status + "   " + command;
+                commandLog.setText(output);
             }
         });
     }
@@ -139,5 +178,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("preferences",MODE_PRIVATE);
         author.setText(preferences.getString("username","no login data"));
         addressee.setText(preferences.getString("addressee", "no addressee"));
+    }
+    public String correctTimeFormat(Integer input){
+        String output ="";
+        if(input <10){
+            output = "0";
+        }
+        output+=input;
+        return output;
     }
 }
