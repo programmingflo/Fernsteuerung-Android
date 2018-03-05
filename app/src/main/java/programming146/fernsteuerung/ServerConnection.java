@@ -48,11 +48,26 @@ class ServerConnection extends AsyncTask<String,Void,JSONObject> {
         password.add("password");
         password.add(sharedPreferences.getString("password","test0815"));
 
+        ArrayList<String> addressee = new ArrayList<>();
+        addressee.add("adressat");
+        addressee.add(node[1]);
+
+        ArrayList<String> device = new ArrayList<>();
+        device.add("device");
+        device.add(node[2]);
+
+        ArrayList<String> command = new ArrayList<>();
+        command.add("command");
+        command.add(node[3]);
+
         ArrayList<ArrayList<String>> request = new ArrayList<>();
         request.add(account);
         request.add(password);
+        request.add(addressee);
+        request.add(device);
+        request.add(command);
 
-        request.remove(0);
+        //request.remove(0);
 
         StringBuilder requestString = new StringBuilder();
 
@@ -66,6 +81,7 @@ class ServerConnection extends AsyncTask<String,Void,JSONObject> {
         }
 
         byte[]  postData        = requestString.toString().getBytes(Charset.forName("utf-8"));
+        Log.d("146s","requestString: "+requestString);
         //Log.v("146s","postData: "+postData);
         int     postDataLength  = postData.length;
         //Log.v("146s","postDataLength: "+postDataLength);
@@ -102,14 +118,14 @@ class ServerConnection extends AsyncTask<String,Void,JSONObject> {
             content=contentAsString;
             return contentAsString;
         }catch (IOException e){
-            Log.d("146s","content: "+content+" error: "+e);
+            Log.d("146s","content: "+content+" error: "+e.toString());
         }finally {
             if(is != null){
                 try{
                     is.close();
                 }catch(IOException e){
                     e.printStackTrace();
-                    Log.d("146s","content: "+content+" error: "+e);
+                    Log.d("146s","content: "+content+" error: "+e.toString());
                 }
             }
         }
@@ -125,10 +141,10 @@ class ServerConnection extends AsyncTask<String,Void,JSONObject> {
         try{
             return new JSONObject(downloadFromUrl(request));
         }catch(IOException e){
-            Log.d("146s","Load failed");
+            Log.d("146s","Load failed: "+e);
             return null;
         }catch(JSONException e){
-            Log.d("146s","Parsing failed");
+            Log.d("146s","Parsing failed: "+e);
             return null;
         }
     }
