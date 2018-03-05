@@ -86,6 +86,7 @@ class ServerConnection extends AsyncTask<String,Void,JSONObject> {
         int     postDataLength  = postData.length;
         //Log.v("146s","postDataLength: "+postDataLength);
         String content = "";
+        String output = "{";
 
         try{
             URL url = new URL(urlString);
@@ -119,6 +120,7 @@ class ServerConnection extends AsyncTask<String,Void,JSONObject> {
             return contentAsString;
         }catch (IOException e){
             Log.d("146s","content: "+content+" error: "+e.toString());
+            output += "\"error\" => \""+e+"\"";
         }finally {
             if(is != null){
                 try{
@@ -126,10 +128,11 @@ class ServerConnection extends AsyncTask<String,Void,JSONObject> {
                 }catch(IOException e){
                     e.printStackTrace();
                     Log.d("146s","content: "+content+" error: "+e.toString());
+                    output += "\"error\" => \""+e+"\"";
                 }
             }
         }
-        return "";
+        return output + "}";
     }
 
     private static String convertStreamToString(InputStream is){
